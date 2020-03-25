@@ -9,10 +9,10 @@ class QuoteCard extends React.Component {
         this.state = {
         simpsons: []
         };
-        this.getSimpson = this.getSimpson.bind(this);
+        this.componentDidMount = this.componentDidMount.bind(this);
     }
 
-    getSimpson() {
+    componentDidMount() {
       // Send the request
         axios.get('https://simpsons-quotes-api.herokuapp.com/quotes')
         // Extract the DATA from the received response
@@ -29,8 +29,10 @@ class QuoteCard extends React.Component {
     render(){
     return (
         <div>
-            <DisplaySimpson simpsons={this.state.simpsons} />
-            <button type="button" onClick={this.getSimpson}>Get a simpson</button>
+            {
+                this.state.simpsons ? <DisplaySimpson simpsons={this.state.simpsons} /> : <p>No data yet</p>
+            }
+            <button type="button" onClick={this.componentDidMount}>Get a simpson</button>
         </div>
     );
 }
